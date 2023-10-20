@@ -1,24 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import mockData from  "./mockData/mock-data.json"
+
+
+interface MockData {
+  cols: string[];
+  data: (string | number)[][];
+}
+
+const data: MockData = mockData;
+
+const newData = data.data.map((item,index)=>{
+  const newObject: any = {};
+  data.cols.forEach((col, colIndex) => {
+    newObject[col] = item[colIndex];
+  });
+  return newObject;
+})
+
+console.log(mockData,"mock");
+console.log(newData[0].name,"neww");
+
+  
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {newData[0].city}
     </div>
   );
 }
