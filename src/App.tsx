@@ -1,6 +1,6 @@
-import React from 'react';
-import mockData from  "./mockData/mock-data.json"
-
+import React, { useEffect, useState } from "react";
+import mockData from "./mockData/mock-data.json";
+import useDebounce from "./hooks/useDebounce";
 
 interface MockData {
   cols: string[];
@@ -9,23 +9,30 @@ interface MockData {
 
 const data: MockData = mockData;
 
-const newData = data.data.map((item,index)=>{
+const newData = data.data.map((item, index) => {
   const newObject: any = {};
   data.cols.forEach((col, colIndex) => {
     newObject[col] = item[colIndex];
   });
   return newObject;
-})
-
-console.log(mockData,"mock");
-console.log(newData[0].name,"neww");
-
-  
+});
 
 function App() {
+  const [searchInput, setSearchInput] = useState<string>("");
+  const debounceResult = useDebounce(searchInput, 1000);
+
+  const results = newData.filter((item) => {
+    return item.nameSurname
+      .toLocaleLowerCase()
+      .includes(debounceResult.toLocaleLowerCase());
+  });
+
   return (
     <div className="App">
-      {newData[0].city}
+      <input type="text" onChange={(e) => setSearchInput(e.target.value)} />
+      {results?.map((item) => (
+        <p>{item.nameSurname}</p>
+      ))}
     </div>
   );
 }
