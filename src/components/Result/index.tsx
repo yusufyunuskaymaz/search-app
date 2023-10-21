@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./style.module.scss";
 import { useNavigate } from "react-router-dom";
+import { IUser } from "../../types";
 
 type SearchResultProps = {
   results: any[];
@@ -8,18 +9,22 @@ type SearchResultProps = {
 
 export const SearchResult = (props: SearchResultProps) => {
   let { results } = props;
-  const length = results.length;
-  console.log(results, "ss");
+  
   const navigate = useNavigate();
+
+  const length = results.length;
+
+  let previewResults: IUser[] = []
   let showMore = false;
+
   if (results.length > 3) {
-    results = results.slice(0, 3);
+    previewResults = results.slice(0, 3);
     showMore = true;
   }
   return (
     <div className={styles.result}>
-      {results.length > 0 ? (
-        results?.map((item) => <p key={item.id}>{item.nameSurname}</p>)
+      {length > 0 ? (
+        previewResults?.map((item) => <p key={item.id}>{item.nameSurname}</p>)
       ) : (
         <p>Nothinf found...</p>
       )}

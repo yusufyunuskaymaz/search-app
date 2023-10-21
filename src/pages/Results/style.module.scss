@@ -1,0 +1,50 @@
+
+.results {
+  text-align: center;
+  width: 25rem;
+}
+.pagContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 2rem 0;
+
+  .pagination {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid #484848;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    color: #484848;
+  }
+
+
+  .dotNota {
+    font-weight: bold;
+  }
+}
+
+.itemContainer {
+  padding: 0.4rem 1rem;
+  border-bottom: 2px solid gray;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex{
+  display: flex;
+  justify-content: space-between;
+}
+
+.company,.mail{
+  font-size: .9rem;
+  // text-decoration: underline  ;
+  
+}
+
+.country{
+  font-size: .9rem;
+  color: gray;
+  text-align: left;
+}
