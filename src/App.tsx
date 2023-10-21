@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import mockData from "./mockData/mock-data.json";
 import useDebounce from "./hooks/useDebounce";
+import { SearchInput } from "./components/SearchInput";
+import { SearchResult } from "./components/Result";
 
 interface MockData {
   cols: string[];
@@ -29,10 +31,8 @@ function App() {
 
   return (
     <div className="App">
-      <input type="text" onChange={(e) => setSearchInput(e.target.value)} />
-      {results?.map((item) => (
-        <p>{item.nameSurname}</p>
-      ))}
+      <SearchInput setSearchInput={setSearchInput} />
+      <SearchResult results={results} />
     </div>
   );
 }
