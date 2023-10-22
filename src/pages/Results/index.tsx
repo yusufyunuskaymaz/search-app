@@ -22,11 +22,20 @@ export const Results = () => {
     setPaginationIndex(paginationIndex + value);
   };
 
-  const handleSorting = () => {
-    const sortedData = previewData1.sort((a, b) =>
-      a.nameSurname > b.nameSurname ? 1 : -1
-    );
-    setPreviewData(sortedData);
+  const handleSorting = (e:React.MouseEvent<HTMLUListElement, MouseEvent>) => {
+    const target = e.target as HTMLElement;
+
+    if (target.dataset.sort) {
+      const sortValue = target.dataset.sort as keyof typeof options;
+  
+      const options = {
+        "a-z": [...previewData1].sort((a, b) => (a.nameSurname < b.nameSurname ? -1 : 1)),
+        "z-a": [...previewData1].sort((a, b) => (a.nameSurname < b.nameSurname ? 1 : -1)),
+        "1-100": [...previewData1].sort((a, b) => a.id - b.id),
+        "100-1": [...previewData1].sort((a, b) => b.id - a.id),
+      };
+      setPreviewData(options[sortValue]);
+    }
   };
 
   return (
@@ -34,11 +43,12 @@ export const Results = () => {
       <div className={styles.container}>
         <div className={styles.results}>
           {previewData.map((item) => {
+            console.log(previewData,"pree");
             return (
-              <div className={styles.itemContainer}>
+              <div key={item.id} className={styles.itemContainer}>
                 <div className={styles.flex}>
                   <div>
-                    <p>{item.nameSurname}</p>
+                    <p>{item.nameSurname} - {item.id}</p>
                     <p className={styles.mail}>{item.email}</p>
                   </div>
                   <div>
@@ -55,11 +65,11 @@ export const Results = () => {
         </div>
         <div className={styles.orderBtn}>
           <div>Order By</div>
-          <ul className={styles.orderMenu}>
-            <li onClick={() => handleSorting()}>Name Ascending</li>
-            <li>Name Descending</li>
-            <li>Year Ascending</li>
-            <li>Year Ascending</li>
+          <ul  onClick={(e) => handleSorting(e)} className={styles.orderMenu}>
+            <li data-sort="a-z" >Name Ascending</li>
+            <li data-sort="z-a">Name Descending</li>
+            <li data-sort="1-100">Year Ascending</li>
+            <li data-sort="100-1">Year Descending</li>
           </ul>
         </div>
       </div>
