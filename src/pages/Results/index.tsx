@@ -5,22 +5,30 @@ import styles from "./style.module.scss";
 
 export const Results = () => {
   let { state: data } = useLocation() as { state: IUser[] };
-  console.log(data);
   const postsPerPage = 5;
   const paginationCount = Math.ceil(data.length / postsPerPage);
   const pageNumbers: number[] = [];
   const [paginationIndex, setPaginationIndex] = useState(1);
-  const pag = paginationIndex * postsPerPage;
-  const previewData1 = data.slice(pag - postsPerPage, pag);
-  const [previewData, setPreviewData] = useState<IUser[]>(previewData1);
+  const lastItemIndex = paginationIndex * postsPerPage;
+  const previewData = data.slice(lastItemIndex - postsPerPage, lastItemIndex);
+  const [previewData1, setPreviewData1] = useState(previewData)
 
   for (let i = 1; i <= paginationCount; i++) {
     pageNumbers.push(i);
   }
 
+  useEffect(() => {
+    const deneme = data.slice(lastItemIndex - postsPerPage, lastItemIndex);
+    setPreviewData1(deneme)
+  }, [paginationIndex])
+
+
+
+
   const handlePrevNextBtns = (value: number) => {
     setPaginationIndex(paginationIndex + value);
   };
+
 
   const handleSorting = (e:React.MouseEvent<HTMLUListElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
@@ -29,12 +37,12 @@ export const Results = () => {
       const sortValue = target.dataset.sort as keyof typeof options;
   
       const options = {
-        "a-z": [...previewData1].sort((a, b) => (a.nameSurname < b.nameSurname ? -1 : 1)),
-        "z-a": [...previewData1].sort((a, b) => (a.nameSurname < b.nameSurname ? 1 : -1)),
-        "1-100": [...previewData1].sort((a, b) => a.id - b.id),
-        "100-1": [...previewData1].sort((a, b) => b.id - a.id),
+        "a-z": [...data].sort((a, b) => (a.nameSurname < b.nameSurname ? -1 : 1)),
+        "z-a": [...data].sort((a, b) => (a.nameSurname < b.nameSurname ? 1 : -1)),
+        "1-100": [...data].sort((a, b) => a.id - b.id),
+        "100-1": [...data].sort((a, b) => b.id - a.id),
       };
-      setPreviewData(options[sortValue]);
+      setPreviewData1(options[sortValue].slice(0,5));
     }
   };
 
@@ -42,8 +50,7 @@ export const Results = () => {
     <>
       <div className={styles.container}>
         <div className={styles.results}>
-          {previewData.map((item) => {
-            console.log(previewData,"pree");
+          {previewData1.map((item) => {
             return (
               <div key={item.id} className={styles.itemContainer}>
                 <div className={styles.flex}>
