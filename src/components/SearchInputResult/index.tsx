@@ -1,12 +1,9 @@
 import React from "react";
 import styles from "./style.module.scss";
 import { useNavigate } from "react-router-dom";
-import { IUser } from "../../types";
+import { IUser,SearchResultProps } from "../../types";
 
-type SearchResultProps = {
-  results: any[];
-  setSearchInput(val: string): void;
-};
+
 
 export const SearchResult = (props: SearchResultProps) => {
   let { results } = props;

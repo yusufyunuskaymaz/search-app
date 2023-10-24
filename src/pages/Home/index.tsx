@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import mockData from "../../mockData/mock-data.json";
 import useDebounce from "../../hooks/useDebounce";
 import { SearchInput } from "../../components/SearchInput";
-import { SearchResult } from "../../components/Result";
+import { SearchResult } from "../../components/SearchInputResult";
 import { IUser } from "../../types";
+import Button from "../../components/Button/Button";
+import styles from "./styles.module.scss";
+import logo from "../../assets/images/logo.png"
+import Title from "../../components/Title/Title";
 
 interface MockData {
   cols: string[];
@@ -43,13 +47,14 @@ const newData = data.data.map((item, index) => {
     newObject[col] = item[colIndex];
     if (col === "date") {
       const tomorrow = new Date();
-     const formattedDate = tomorrow.setDate(tomorrow.getDate()+ Math.floor(Math.random()*1000));
+      const formattedDate = tomorrow.setDate(
+        tomorrow.getDate() + Math.floor(Math.random() * 1000)
+      );
       newObject.date = formattedDate;
     }
   });
   return newObject;
 });
-
 
 export const Home = () => {
   const [searchInput, setSearchInput] = useState<string>("");
@@ -61,12 +66,25 @@ export const Home = () => {
       .includes(debounceResult.toLocaleLowerCase());
   });
 
-  console.log(results,"result");
+  console.log(results, "result");
 
   return (
-    <div className="container">
-      <SearchInput setSearchInput={setSearchInput} results={results} />
-      <SearchResult results={results} setSearchInput={setSearchInput} />
+    <div className={styles.container}>
+      <div className={styles.addNewButton}>
+        <Button text={"Add new record"} />
+      </div>
+      <div className={styles.logo}>
+        <img src={logo} alt="logo" />
+      </div>
+      <div className="container">
+        <Title text="Find in records" />
+        <SearchInput
+          setSearchInput={setSearchInput}
+          searchInput={searchInput}
+          results={results}
+        />
+        <SearchResult results={results} setSearchInput={setSearchInput} />
+      </div>
     </div>
   );
 };
