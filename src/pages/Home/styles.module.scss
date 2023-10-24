@@ -1,16 +1,33 @@
 .container{
+    max-width: 1200px;
+    margin: auto;
     display: flex;
     flex-direction: column;
-    border: 1px solid red;
+    justify-content: flex-start;
     height: 100vh;
     width: 100%;
     padding: 4rem 2rem;
+
+    .body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 60%;
+        margin: 1rem auto;
+        text-align: left;
+        padding-left: 2rem;
+    }
 
     .addNewButton{
     text-align: right;
     }
     .logo{
         text-align: center;
+    }
+
+    .searchResult{
+        width: 65%;
+        margin: 0 auto;
     }
 }
 

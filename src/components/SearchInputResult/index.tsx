@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./style.module.scss";
 import { useNavigate } from "react-router-dom";
 import { IUser,SearchResultProps } from "../../types";
+import location from "../../assets/images/location.png"
 
 
 
@@ -27,7 +28,10 @@ export const SearchResult = (props: SearchResultProps) => {
         <div className={styles.result}>
           {length > 0 ? (
             previewResults?.map((item) => (
-              <p key={item.id}>{item.nameSurname}</p>
+              <div className={styles.location}>
+                <img src={location} alt="location-icon" />
+              <p key={item.id}>{item.nameSurname} <br /> <span>{item.city} {item.country}</span></p>
+              </div>
             ))
           ) : (
             <p>Nothinf found...</p>
@@ -37,7 +41,7 @@ export const SearchResult = (props: SearchResultProps) => {
               className={styles.showMore}
               onClick={() => navigate("/results", { state: results })}
             >
-              Show More
+              Show More...
             </p>
           ) : (
             ""

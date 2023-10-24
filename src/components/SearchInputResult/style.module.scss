@@ -1,9 +1,28 @@
 .result{
-    background-color: gainsboro;
-    margin-top: 1.5rem;
-    padding: .5rem 2rem;
+    // margin-top: 1.5rem;
+    padding: .7rem 2rem;
     border-radius: 1rem;
-    min-width: 11rem;
+    width: 100%;
+    text-align: left;
+    border: 1px solid #484848;
+    border-radius: 1.5rem;
+
+    .location{
+        display: flex;
+        align-items: center;
+    }
+
+    p{
+        padding: 1rem;
+        
+        span{
+            color: #72777A;
+            font-size: 14px;
+        }
+    }
+
+    
+
 }
 
 .showMore{

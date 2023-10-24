@@ -10,6 +10,11 @@ ul li {
   padding: 0.2rem 0;
 }
 
+.layout {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .container {
   display: flex;
   // gap: 2rem;
@@ -20,12 +25,14 @@ ul li {
 }
 
 .results {
-  text-align: center;
-  width: 25rem;
+  text-align: left;
+  width: 50%;
+  margin: 0 auto;
 }
 .pagContainer {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   margin: 2rem 0;
 
@@ -45,15 +52,21 @@ ul li {
 }
 
 .itemContainer {
-  padding: 0.4rem 1rem;
-  border-bottom: 2px solid gray;
+  padding: 2rem 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #7E7E7E;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
+  &:hover{
+    background-color: #4F75C236;
+  }
 }
 
 .flex {
   display: flex;
   justify-content: space-between;
+  
 }
 
 .company,
@@ -74,17 +87,16 @@ ul li {
   padding: 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 5px 4px 10px 2px rgba(0, 0, 0, 0.1);
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   border: 1px solid black;
   font-weight: 600;
-  li{
-    padding: .3rem .5rem;
-    border-radius: .5rem;
-
+  li {
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.5rem;
   }
 
-  li:hover{
-    background-color: #B3B3B3;
+  li:hover {
+    background-color: #b3b3b3;
     color: #fff;
   }
 }
@@ -99,9 +111,49 @@ ul li {
   display: block;
 }
 
-.active{
+.active {
   background-color: #204080;
   color: #fff !important;
   border: 2px solid #204080 !important;
 }
 
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2.2rem;
+}
+
+.logo img {
+  height: 63px;
+  margin-right: 2rem;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  width: 70%;
+}
+
+
+.location{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  span{
+    color: #72777A;
+    font-size: 14px;
+
+  }
+  
+}
+
+.date{
+  text-align: right;
+  color: #484848;
+  p{
+    margin-top: .5rem;
+    font-weight: bold;
+
+  }
+}

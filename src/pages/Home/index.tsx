@@ -6,7 +6,7 @@ import { SearchResult } from "../../components/SearchInputResult";
 import { IUser } from "../../types";
 import Button from "../../components/Button/Button";
 import styles from "./styles.module.scss";
-import logo from "../../assets/images/logo.png"
+import logo from "../../assets/images/logo.png";
 import Title from "../../components/Title/Title";
 
 interface MockData {
@@ -76,15 +76,22 @@ export const Home = () => {
       <div className={styles.logo}>
         <img src={logo} alt="logo" />
       </div>
-      <div className="container">
+      <div className={styles.body}>
         <Title text="Find in records" />
         <SearchInput
           setSearchInput={setSearchInput}
           searchInput={searchInput}
           results={results}
         />
-        <SearchResult results={results} setSearchInput={setSearchInput} />
       </div>
+
+      {searchInput ? (
+        <div className={styles.searchResult}>
+          <SearchResult results={results} setSearchInput={setSearchInput} />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

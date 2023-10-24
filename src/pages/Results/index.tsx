@@ -4,13 +4,16 @@ import { IUser } from "../../types";
 import styles from "./style.module.scss";
 import { SearchInput } from "../../components/SearchInput";
 import { SearchInputProps } from "../../types";
+import logo from "../../assets/images/logo.png";
+import Button from "../../components/Button/Button";
+import location from "../../assets/images/location.png";
 
 export const Results = (props: SearchInputProps) => {
-  const { setSearchInput,searchInput } = props;
-  console.log(searchInput,"svvv");
-  let { state } = useLocation() as { state:  any };
-  console.log(state,"aaa");
-  const data : any[] = state
+  const { setSearchInput, searchInput } = props;
+  console.log(searchInput, "svvv");
+  let { state } = useLocation() as { state: any };
+  console.log(state, "aaa");
+  const data: any[] = state;
   const postsPerPage = 5;
   const paginationCount = Math.ceil(data.length / postsPerPage);
   const pageNumbers: number[] = [];
@@ -48,8 +51,20 @@ export const Results = (props: SearchInputProps) => {
   };
 
   return (
-    <>
-      <SearchInput searchInput={searchInput} setSearchInput={setSearchInput} />
+    <div className={styles.layout}>
+      <div className={styles.head}>
+        <div className={styles.right}>
+          <div className={styles.logo}>
+            <img src={logo} alt="logo" />
+          </div>
+
+          <SearchInput
+            searchInput={searchInput}
+            setSearchInput={setSearchInput}
+          />
+        </div>
+        <Button text="Add new record" />
+      </div>
       <div className={styles.container}>
         <div className={styles.results}>
           {previewData
@@ -58,13 +73,17 @@ export const Results = (props: SearchInputProps) => {
               return (
                 <div key={item.id} className={styles.itemContainer}>
                   <div className={styles.flex}>
-                    <div>
+                    <div className={styles.location}>
+                      <img src={location} alt="location" />
+
                       <p>
-                        {item.nameSurname} - {item.id}
+                        {item.country} <br />
+                        <span>{item.city}</span>
                       </p>
-                      <p className={styles.mail}>{item.email}</p>
+                      {/* <p className={styles.mail}>{item.email}</p> */}
                     </div>
-                    <div>
+                    <div className={styles.date}>
+                      <span>{item.nameSurname}</span>
                       <p className={styles.company}>
                         {new Date(item.date).toLocaleDateString()}
                       </p>
@@ -128,6 +147,6 @@ export const Results = (props: SearchInputProps) => {
           Next
         </button>
       </div>
-    </>
+    </div>
   );
 };
