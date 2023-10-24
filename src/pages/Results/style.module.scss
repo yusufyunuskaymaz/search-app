@@ -17,18 +17,16 @@ ul li {
 
 .container {
   display: flex;
-  // gap: 2rem;
   align-items: flex-start;
   margin-top: 1rem;
-  // max-height: 90vh;
-  min-height: 510px;
+  min-height: 520px;
+  justify-content: center;
 }
 
 .results {
   text-align: left;
-  width: 50%;
-  margin: 0 auto;
 }
+
 .pagContainer {
   display: flex;
   align-items: center;
@@ -49,17 +47,28 @@ ul li {
   .dotNota {
     font-weight: bold;
   }
+  .nextBtn, .prevBtn{
+    background-color: #fff;
+    padding: .3rem 1rem;
+    border-radius: .5rem;
+    border: 2px solid #484848;
+    color: #484848;
+    font-weight: bold;
+    cursor: pointer;
+
+  }
 }
 
 .itemContainer {
-  padding: 2rem 1rem;
+  padding: .8rem 1rem;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #7E7E7E;
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  width: 40vw;
   &:hover{
     background-color: #4F75C236;
+    border-radius: 1rem;
   }
 }
 
@@ -127,6 +136,7 @@ ul li {
 .logo img {
   height: 63px;
   margin-right: 2rem;
+  cursor: pointer;
 }
 
 .right {
@@ -157,3 +167,24 @@ ul li {
 
   }
 }
+
+.divider{
+  height: 1px;
+  width: 100%;
+  background-color: #7E7E7E;
+  margin: 1rem 0;
+}
+
+
+.dropdown{
+  display: flex;
+  align-items: center;
+  border: 1px solid #414141;
+  background-color: #F3F2F2;
+  font-weight: 500;
+  color: #484848;
+  width: fit-content;
+  padding: .1rem .5rem;
+  border-radius: .5rem;
+}
+

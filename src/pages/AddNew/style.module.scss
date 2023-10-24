@@ -1,0 +1,68 @@
+.container {
+  max-width: 1200px;
+  margin: 1.5rem auto;
+  display: flex;
+  gap: 2.4rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .logo{
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 9rem;
+
+  }
+  .logo h3{
+    margin-left: 1rem;
+  }
+  .logo .mainLogo {
+    width: 149px;
+    cursor: pointer;
+    
+  }
+  .body{
+    width: 50%;
+    
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+    color: #686868;
+    font-weight: 700;
+  }
+  .input{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+  .input input{
+    padding: .6rem 0 .6rem .8rem;
+    border-radius: .5rem;
+    border: 2px solid #484848;
+    cursor: pointer;
+    &:focus{
+        outline:none;
+    }
+    &:hover{
+        background-color: #64646414;
+    }
+  }
+}
+
+.arrow{
+  display: flex;
+  align-items: center;
+
+  img{
+    width: 2rem;
+    cursor: pointer;
+  }
+
+ 
+  
+}
+
+
+

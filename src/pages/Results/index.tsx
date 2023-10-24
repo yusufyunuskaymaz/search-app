@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IUser } from "../../types";
 import styles from "./style.module.scss";
 import { SearchInput } from "../../components/SearchInput";
@@ -7,12 +7,17 @@ import { SearchInputProps } from "../../types";
 import logo from "../../assets/images/logo.png";
 import Button from "../../components/Button/Button";
 import location from "../../assets/images/location.png";
+import dropdown from "../../assets/images/dropdown.png"
+
 
 export const Results = (props: SearchInputProps) => {
   const { setSearchInput, searchInput } = props;
-  console.log(searchInput, "svvv");
+ const navigate = useNavigate()
+
   let { state } = useLocation() as { state: any };
-  console.log(state, "aaa");
+
+  console.log(state,"state");
+
   const data: any[] = state;
   const postsPerPage = 5;
   const paginationCount = Math.ceil(data.length / postsPerPage);
@@ -55,7 +60,7 @@ export const Results = (props: SearchInputProps) => {
       <div className={styles.head}>
         <div className={styles.right}>
           <div className={styles.logo}>
-            <img src={logo} alt="logo" />
+            <img src={logo}  onClick={()=>navigate("/")} alt="logo" />
           </div>
 
           <SearchInput
@@ -63,7 +68,7 @@ export const Results = (props: SearchInputProps) => {
             setSearchInput={setSearchInput}
           />
         </div>
-        <Button text="Add new record" />
+        <Button handleClick={()=>navigate("/add-new")} text="Add new record" />
       </div>
       <div className={styles.container}>
         <div className={styles.results}>
@@ -71,34 +76,41 @@ export const Results = (props: SearchInputProps) => {
             .slice(lastItemIndex - postsPerPage, lastItemIndex)
             .map((item) => {
               return (
-                <div key={item.id} className={styles.itemContainer}>
-                  <div className={styles.flex}>
-                    <div className={styles.location}>
-                      <img src={location} alt="location" />
+                <>
+                  <div key={item.id} className={styles.itemContainer}>
+                    <div className={styles.flex}>
+                      <div className={styles.location}>
+                        <img src={location} alt="location" />
 
-                      <p>
-                        {item.country} <br />
-                        <span>{item.city}</span>
-                      </p>
-                      {/* <p className={styles.mail}>{item.email}</p> */}
+                        <p>
+                          {item.country} <br />
+                          <span>{item.city}</span>
+                        </p>
+                        {/* <p className={styles.mail}>{item.email}</p> */}
+                      </div>
+                      <div className={styles.date}>
+                        <span>{item.nameSurname}</span>
+                        <p className={styles.company}>
+                          {new Date(item.date).toLocaleDateString()}
+                        </p>
+                      </div>
                     </div>
-                    <div className={styles.date}>
-                      <span>{item.nameSurname}</span>
-                      <p className={styles.company}>
-                        {new Date(item.date).toLocaleDateString()}
-                      </p>
-                    </div>
-                  </div>
 
-                  {/* <p className={styles.country}>
+                    {/* <p className={styles.country}>
                     {item.country} - {item.city}
                   </p> */}
-                </div>
+                  </div>
+                  <div className={styles.divider}></div>
+                </>
               );
             })}
         </div>
+
         <div className={styles.orderBtn}>
-          <div>Order By</div>
+          <div className={styles.dropdown}>
+            <img src={dropdown} alt="" />
+            <span>Order By</span>
+            </div>
           <ul onClick={(e) => handleSorting(e)} className={styles.orderMenu}>
             <li data-sort="a-z">Name Ascending</li>
             <li data-sort="z-a">Name Descending</li>
@@ -111,6 +123,7 @@ export const Results = (props: SearchInputProps) => {
         <button
           disabled={paginationIndex === 1}
           onClick={() => handlePrevNextBtns(-1)}
+          className={styles.prevBtn}
         >
           Previous
         </button>
@@ -143,6 +156,7 @@ export const Results = (props: SearchInputProps) => {
         <button
           disabled={paginationIndex >= paginationCount}
           onClick={() => handlePrevNextBtns(1)}
+          className={styles.nextBtn}
         >
           Next
         </button>
