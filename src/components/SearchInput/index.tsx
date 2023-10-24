@@ -3,9 +3,10 @@ import styles from "./style.module.scss"
 import { useNavigate } from "react-router-dom";
 
 
-type SearchInputProps = {
+export type SearchInputProps = {
   setSearchInput(val:string):void;
-  results: any[]
+  searchInput?:string;
+  results?: any[]
 }
 
 export const SearchInput = (props:SearchInputProps) => {

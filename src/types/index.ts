@@ -7,4 +7,5 @@ export type IUser = {
   website: string;
   country: string;
   city: string;
+  date: number;
 };
