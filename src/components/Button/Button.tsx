@@ -14,6 +14,7 @@ const Button = (props: ButtonProps) => {
         onClick={() => handleClick?.()}
         className={styles.button}
         style={{background: disabled ? '#4F75C2': '#204080'}}
+        data-test="main-button"
       >
         {text}
       </button>

@@ -7,7 +7,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { IUser } from "../../types";
 import close from "../../assets/images/close.png";
 import { getFromLocalStorage } from "../Home";
-import axios from "axios";
 
 export const AddNew = () => {
   const navigate = useNavigate();
@@ -37,26 +36,18 @@ export const AddNew = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (newRecord.nameSurname.length < 4) {
-      setError({
-        field: "nameSurname",
-        message: "Name Surname must be at least 4 characters",
-      });
+      setError({field: "nameSurname",message: "Name Surname must be at least 4 characters",});
     } else if (newRecord.country.length < 2) {
-      setError({
-        field: "country",
-        message: "Country must be at least 2 characters",
+      setError({field: "country",message: "Country must be at least 2 characters",
       });
     } else if (newRecord.city.length < 2) {
-      setError({
-        field: "city",
-        message: "City must be at least 2 characters",
+      setError({field: "city",message: "City must be at least 2 characters",
       });
     } else if (!isValidEmail(newRecord.email)) {
       setError({ field: "email", message: "Invalid email format" });
     } else if (!isValidURL(newRecord.website)) {
       setError({ field: "website", message: "Invalid website URL" });
     } else {
-      shortenWebsite(newRecord.website)
       if (error) {
         setError(initValue);
       }
@@ -86,32 +77,7 @@ export const AddNew = () => {
     return urlPattern.test(url);
   };
 
-  const shortenWebsite = async (url: string) => {
-    try {
-      const response = await axios.post(
-        "https://url-shortener-service.p.rapidapi.com/shorten",
-        {
-          url: url,
-        },
-        {
-          headers: {
-            "X-RapidAPI-Key":
-              "39374c83acmsh04307aae8d9d675p140efejsnb22703cf160d",
-            "X-RapidAPI-Host": "url-shortener-service.p.rapidapi.com",
-          },
-        }
-      );
 
-      const result_url = response.data.result_url;
-      if (result_url) {
-        setNewRecord({ ...newRecord, website: result_url });
-      }
-      return true
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
 
   const [disabled, setDisabled] = useState(true);
 
