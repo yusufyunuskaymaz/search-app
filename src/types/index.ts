@@ -42,3 +42,12 @@ export type ButtonProps = {
 export type ITitleProps = {
   text:string;
 } 
+
+
+export type IPaginationProps = {
+  pageNumbers: number[];
+  paginationIndex:number;
+  paginationCount:number;
+  setPaginationIndex(value:number):void;
+  handlePrevNextBtns(value:number):void;
+} 

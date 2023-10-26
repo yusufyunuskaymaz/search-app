@@ -11,7 +11,7 @@ import axios from "axios";
 
 export const AddNew = () => {
   const navigate = useNavigate();
- const {state:homePage} = useLocation()
+  const { state: homePage } = useLocation();
 
   const allResults: IUser[] = getFromLocalStorage("allResults");
 
@@ -56,6 +56,7 @@ export const AddNew = () => {
     } else if (!isValidURL(newRecord.website)) {
       setError({ field: "website", message: "Invalid website URL" });
     } else {
+      shortenWebsite(newRecord.website)
       if (error) {
         setError(initValue);
       }
@@ -81,26 +82,34 @@ export const AddNew = () => {
   };
 
   const isValidURL = async (url: string) => {
-    // const urlPattern = /^(https?:\/\/)?[\w.-]+\.\w+(\S+)?$/;
-    // return urlPattern.test(url);
-    const encodedParams = new URLSearchParams();
-    encodedParams.set("url", "https://google.com/");
+    const urlPattern = /^(https?:\/\/)?[\w.-]+\.\w+(\S+)?$/;
+    return urlPattern.test(url);
+  };
 
-    const options = {
-      method: "POST",
-      url: "https://url-shortener-service.p.rapidapi.com/shorten",
-      headers: {
-        "content-type": "application/x-www-form-urlencoded",
-        "X-RapidAPI-Key": "39374c83acmsh04307aae8d9d675p140efejsnb22703cf160d",
-        "X-RapidAPI-Host": "url-shortener-service.p.rapidapi.com",
-      },
-      data: encodedParams,
-    };
+  const shortenWebsite = async (url: string) => {
     try {
-      const response = await axios.request(options);
-      console.log(response.data);
+      const response = await axios.post(
+        "https://url-shortener-service.p.rapidapi.com/shorten",
+        {
+          url: url,
+        },
+        {
+          headers: {
+            "X-RapidAPI-Key":
+              "39374c83acmsh04307aae8d9d675p140efejsnb22703cf160d",
+            "X-RapidAPI-Host": "url-shortener-service.p.rapidapi.com",
+          },
+        }
+      );
+
+      const result_url = response.data.result_url;
+      if (result_url) {
+        setNewRecord({ ...newRecord, website: result_url });
+      }
+      return true
     } catch (error) {
       console.error(error);
+      throw error;
     }
   };
 
@@ -111,7 +120,7 @@ export const AddNew = () => {
     setDisabled(booleanValue);
   }, [newRecord]);
 
-  const redirect = homePage ? "/" : "/results"
+  const redirect = homePage ? "/" : "/results";
 
   return (
     <div className={styles.container}>
@@ -134,7 +143,7 @@ export const AddNew = () => {
           src={logo}
           alt="logo"
         />
-        
+
         <div className={styles.arrow}>
           <img
             src={arrow}

@@ -8,6 +8,7 @@ import location from "../../assets/images/location.png";
 import dropdown from "../../assets/images/dropdown.png";
 import { getFromLocalStorage } from "../Home";
 import zoom from "../../assets/images/Vector.png";
+import Pagination from "./Pagination";
 
 export const Results = (props: ResultsSearchInputProps) => {
   const navigate = useNavigate();
@@ -147,50 +148,7 @@ export const Results = (props: ResultsSearchInputProps) => {
           </ul>
         </div>
       </div>
-      <div className={styles.pagContainer}>
-        <button
-          disabled={paginationIndex === 1}
-          onClick={() => handlePrevNextBtns(-1)}
-          className={styles.prevBtn}
-        >
-          Previous
-        </button>
-        {pageNumbers.length > 6
-          ? pageNumbers
-              .slice(0, 3)
-              .concat(pageNumbers.slice(-3))
-              .map((item, index) => (
-                <>
-                  {index === 3 && <span className={styles.dotNota}>...</span>}
-                  <span
-                    onClick={() => setPaginationIndex(item)}
-                    key={item}
-                    className={`${styles.pagination} ${
-                      paginationIndex === item ? styles.active : ""
-                    }`}
-                  >
-                    {item}
-                  </span>
-                </>
-              ))
-          : pageNumbers.map((item) => (
-              <span
-                onClick={() => setPaginationIndex(item)}
-                className={`${styles.pagination} ${
-                  paginationIndex === item ? styles.active : ""
-                }`}
-              >
-                {item}
-              </span>
-            ))}
-        <button
-          disabled={paginationIndex >= paginationCount}
-          onClick={() => handlePrevNextBtns(1)}
-          className={styles.nextBtn}
-        >
-          Next
-        </button>
-      </div>
+      <Pagination pageNumbers={pageNumbers} paginationIndex={paginationIndex} setPaginationIndex={setPaginationIndex} handlePrevNextBtns={handlePrevNextBtns} paginationCount={paginationCount} />
     </div>
   );
 };

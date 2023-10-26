@@ -1,0 +1,32 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+  width: 95%;
+  margin: 0 auto;
+  gap: 1.5rem;
+
+  .sliderDiv {
+    margin-top: 2rem;
+    text-align: left;
+
+    h5 {
+      color: #090A0A;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+    span{
+      color: #6C7072;
+      font-size: 12px;
+    }
+
+    img {
+      max-width: 397px;
+    }
+  }
+
+  .title {
+    width: 90%;
+  }
+}
