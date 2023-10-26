@@ -3,7 +3,7 @@ import logo from "../../assets/images/logo.png";
 import styles from "./style.module.scss";
 import Button from "../../components/Button/Button";
 import arrow from "../../assets/images/arrow.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IUser } from "../../types";
 import close from "../../assets/images/close.png";
 import { getFromLocalStorage } from "../Home";
@@ -11,6 +11,7 @@ import axios from "axios";
 
 export const AddNew = () => {
   const navigate = useNavigate();
+ const {state:homePage} = useLocation()
 
   const allResults: IUser[] = getFromLocalStorage("allResults");
 
@@ -110,6 +111,8 @@ export const AddNew = () => {
     setDisabled(booleanValue);
   }, [newRecord]);
 
+  const redirect = homePage ? "/" : "/results"
+
   return (
     <div className={styles.container}>
       {error.field && (
@@ -131,11 +134,12 @@ export const AddNew = () => {
           src={logo}
           alt="logo"
         />
+        
         <div className={styles.arrow}>
           <img
             src={arrow}
             alt="arrow-back"
-            onClick={() => navigate("/results")}
+            onClick={() => navigate(redirect)}
           />
           <h3>Return to List Page</h3>
         </div>

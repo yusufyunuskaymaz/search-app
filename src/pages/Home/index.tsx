@@ -87,6 +87,8 @@ export const Home = () => {
       .includes(debounceResult.toLocaleLowerCase());
   });
 
+  console.log(results,"results");
+
   const setToLocalStorage = () => {
     localStorage.setItem("results", JSON.stringify({ results, searchInput }));
   };
@@ -95,7 +97,7 @@ export const Home = () => {
     <div className={styles.container}>
       <div className={styles.addNewButton}>
         <Button
-          handleClick={() => navigate("/add-new")}
+          handleClick={() => navigate("/add-new",{state:{homePage:true}})}
           type="button"
           text={"Add new record"}
         />
