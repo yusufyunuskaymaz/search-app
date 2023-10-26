@@ -31,7 +31,7 @@ export const SearchResult = (props: SearchResultProps) => {
         <div className={styles.result}>
           {length > 0 &&
             previewResults?.map((item) => (
-              <div className={styles.location}>
+              <div key={item.id} className={styles.location}>
                 <img src={location} alt="location-icon" />
                 <p key={item.id}>
                   {item.nameSurname} <br />{" "}

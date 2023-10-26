@@ -19,18 +19,18 @@ const Pagination = (props:IPaginationProps) => {
               .slice(0, 3)
               .concat(pageNumbers.slice(-3))
               .map((item, index) => (
-                <>
+                <div key={item}>
                   {index === 3 && <span className={styles.dotNota}>...</span>}
                   <span
                     onClick={() => setPaginationIndex(item)}
-                    key={item}
+                    
                     className={`${styles.pagination} ${
                       paginationIndex === item ? styles.active : ""
                     }`}
                   >
                     {item}
                   </span>
-                </>
+                </div>
               ))
           : pageNumbers.map((item) => (
               <span
@@ -38,6 +38,7 @@ const Pagination = (props:IPaginationProps) => {
                 className={`${styles.pagination} ${
                   paginationIndex === item ? styles.active : ""
                 }`}
+                key={item}
               >
                 {item}
               </span>

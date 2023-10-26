@@ -67,6 +67,8 @@ export const Results = (props: ResultsSearchInputProps) => {
     searchResults();
   };
 
+  console.log(previewData,"ss");
+
   return (
     <div className={styles.layout}>
       <div className={styles.head}>
@@ -93,20 +95,24 @@ export const Results = (props: ResultsSearchInputProps) => {
             />
           </div>
         </div>
+
         <Button
           handleClick={() => navigate("/add-new")}
           text="Add new record"
           type="button"
         />
       </div>
+      {previewData.length === 0 && (
+        <p style={{ textAlign: "center" }}>Nothing found...</p>
+      )}
       <div className={styles.container}>
         <div className={styles.results}>
           {previewData
             .slice(lastItemIndex - postsPerPage, lastItemIndex)
             .map((item) => {
               return (
-                <>
-                  <div key={item.id} className={styles.itemContainer}>
+                <div key={item.id}>
+                  <div className={styles.itemContainer}>
                     <div className={styles.flex}>
                       <div className={styles.location}>
                         <img src={location} alt="location" />
@@ -130,7 +136,7 @@ export const Results = (props: ResultsSearchInputProps) => {
                   </p> */}
                   </div>
                   <div className={styles.divider}></div>
-                </>
+                </div>
               );
             })}
         </div>
@@ -148,7 +154,13 @@ export const Results = (props: ResultsSearchInputProps) => {
           </ul>
         </div>
       </div>
-      <Pagination pageNumbers={pageNumbers} paginationIndex={paginationIndex} setPaginationIndex={setPaginationIndex} handlePrevNextBtns={handlePrevNextBtns} paginationCount={paginationCount} />
+      <Pagination
+        pageNumbers={pageNumbers}
+        paginationIndex={paginationIndex}
+        setPaginationIndex={setPaginationIndex}
+        handlePrevNextBtns={handlePrevNextBtns}
+        paginationCount={paginationCount}
+      />
     </div>
   );
 };
