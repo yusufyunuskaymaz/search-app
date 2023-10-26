@@ -6,20 +6,34 @@ import Button from "../Button/Button";
 import zoom from "../../assets/images/Vector.png";
 
 export const SearchInput = (props: SearchInputProps) => {
-  const { setSearchInput, results, searchInput } = props;
+  const {
+    setSearchInput,
+    setToLocalStorage,
+    searchInput,
+    isResultPage=false,
+    searchResults
+  } = props;
   const navigate = useNavigate();
-  let searchValue: string = "";
-  console.log(searchInput, "searchIII");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const trimValue = e.target.value.trim();
     if (trimValue.length >= 2 && trimValue !== "") {
-      searchValue = trimValue;
-      setSearchInput(searchValue);
+      setSearchInput(trimValue);
     } else if (trimValue === "") {
       setSearchInput("");
     }
   };
+
+
+  const handleClick = () => {
+    if (searchInput === "") {
+      window.alert("Please type something...");
+    } else {
+      navigate("/results");
+      setToLocalStorage?.();
+    }
+  };
+
   return (
     <div className={styles.inputContainer}>
       <div className={styles.inputDiv}>
@@ -31,12 +45,7 @@ export const SearchInput = (props: SearchInputProps) => {
           onChange={(e) => handleChange(e)}
         />
       </div>
-      <Button
-        handleClick={() =>
-          navigate("/results", { state: { results, searchValue } })
-        }
-        text="Search"
-      />
+      <Button type="button" handleClick={() => handleClick()} text="Search" />
     </div>
   );
 };

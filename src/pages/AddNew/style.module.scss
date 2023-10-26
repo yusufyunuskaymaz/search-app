@@ -6,24 +6,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  .logo{
+  .logo {
     display: flex;
     align-items: center;
     align-self: flex-start;
     gap: 9rem;
-
   }
-  .logo h3{
+  .logo h3 {
     margin-left: 1rem;
   }
   .logo .mainLogo {
     width: 149px;
     cursor: pointer;
-    
   }
-  .body{
+  .body {
     width: 50%;
-    
   }
   .form {
     display: flex;
@@ -32,37 +29,77 @@
     color: #686868;
     font-weight: 700;
   }
-  .input{
+  .input {
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: 0.5rem;
   }
-  .input input{
-    padding: .6rem 0 .6rem .8rem;
-    border-radius: .5rem;
+  .input input {
+    padding: 0.6rem 0 0.6rem 0.8rem;
+    border-radius: 0.5rem;
     border: 2px solid #484848;
     cursor: pointer;
-    &:focus{
-        outline:none;
+    &:focus {
+      outline: none;
     }
-    &:hover{
-        background-color: #64646414;
+    &:hover {
+      background-color: #64646414;
+    }
+  }
+
+  .error {
+    display: flex;
+    color: black;
+    position: absolute;
+    bottom: .5rem;
+    right: 1.5rem;
+    background-color: #c4c4c4;
+    padding: 1rem;
+    border-radius: 1rem;
+    gap: 1rem;
+    max-width: 25%;
+    cursor: pointer;
+
+    // p{
+    //   min-width: 16rem;
+    // }
+
+    .text{
+      margin-top: .5rem;
+    }
+
+    h5 {
+      margin-bottom: 1rem;
+    }
+
+    .closeBtn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+
+    img{
+      align-self: flex-end;
+    }
+
+    span{
+      margin-right: 1rem;
+      background-color: #FF4E78;
+      color: #fff;
+      padding: .5rem .8rem;
+      border-radius: 1rem;
+      margin-top: .4rem;
     }
   }
 }
+}
 
-.arrow{
+.arrow {
   display: flex;
   align-items: center;
 
-  img{
+  img {
     width: 2rem;
     cursor: pointer;
   }
-
- 
-  
 }
-
-
-

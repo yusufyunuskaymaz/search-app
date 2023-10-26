@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { IUser } from "../../types";
+import { IUser, ResultsSearchInputProps } from "../../types";
 import styles from "./style.module.scss";
-import { SearchInput } from "../../components/SearchInput";
-import { SearchInputProps } from "../../types";
 import logo from "../../assets/images/logo.png";
 import Button from "../../components/Button/Button";
 import location from "../../assets/images/location.png";
-import dropdown from "../../assets/images/dropdown.png"
+import dropdown from "../../assets/images/dropdown.png";
+import { getFromLocalStorage } from "../Home";
+import zoom from "../../assets/images/Vector.png";
 
+export const Results = (props: ResultsSearchInputProps) => {
+  const navigate = useNavigate();
 
-export const Results = (props: SearchInputProps) => {
-  const { setSearchInput, searchInput } = props;
- const navigate = useNavigate()
+  const data: IUser[] = getFromLocalStorage("results").results;
 
-  let { state } = useLocation() as { state: any };
+  const searchValue = getFromLocalStorage("results").searchInput;
+  const [searchInput, setSearchInput] = useState(searchValue);
+  const [previewData, setPreviewData] = useState(data);
 
-  console.log(state,"state");
-
-  const data: any[] = state;
   const postsPerPage = 5;
-  const paginationCount = Math.ceil(data.length / postsPerPage);
+  const paginationCount = Math.ceil(previewData.length / postsPerPage);
   const pageNumbers: number[] = [];
   const [paginationIndex, setPaginationIndex] = useState(1);
   const lastItemIndex = paginationIndex * postsPerPage;
-  const [previewData, setPreviewData] = useState(data);
 
   for (let i = 1; i <= paginationCount; i++) {
     pageNumbers.push(i);
@@ -55,20 +53,49 @@ export const Results = (props: SearchInputProps) => {
     }
   };
 
+  const searchResults = () => {
+    const result: IUser[] = [...data].filter((item) =>
+      item.nameSurname
+        .toLocaleLowerCase()
+        .includes(searchInput.toLocaleLowerCase())
+    );
+    setPreviewData(result);
+  };
+
+  const handleClick = () => {
+    searchResults();
+  };
+
   return (
     <div className={styles.layout}>
       <div className={styles.head}>
         <div className={styles.right}>
           <div className={styles.logo}>
-            <img src={logo}  onClick={()=>navigate("/")} alt="logo" />
+            <img src={logo} onClick={() => navigate("/")} alt="logo" />
           </div>
 
-          <SearchInput
-            searchInput={searchInput}
-            setSearchInput={setSearchInput}
-          />
+          <div className={styles.inputContainer}>
+            <div className={styles.inputDiv}>
+              <img src={zoom} alt="zoom-icon" />
+              <input
+                className={styles.searchInput}
+                type="text"
+                onChange={(e) => setSearchInput(e.target.value.trim())}
+                value={searchInput}
+              />
+            </div>
+            <Button
+              type="button"
+              handleClick={() => handleClick()}
+              text="Search"
+            />
+          </div>
         </div>
-        <Button handleClick={()=>navigate("/add-new")} text="Add new record" />
+        <Button
+          handleClick={() => navigate("/add-new")}
+          text="Add new record"
+          type="button"
+        />
       </div>
       <div className={styles.container}>
         <div className={styles.results}>
@@ -110,7 +137,7 @@ export const Results = (props: SearchInputProps) => {
           <div className={styles.dropdown}>
             <img src={dropdown} alt="" />
             <span>Order By</span>
-            </div>
+          </div>
           <ul onClick={(e) => handleSorting(e)} className={styles.orderMenu}>
             <li data-sort="a-z">Name Ascending</li>
             <li data-sort="z-a">Name Descending</li>

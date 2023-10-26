@@ -10,20 +10,11 @@ type SearchInputProps = {
 };
 
 const AppRouter = (props: SearchInputProps) => {
-  const { searchInput, setSearchInput } = props;
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/results"
-          element={
-            <Results
-              searchInput={searchInput}
-              setSearchInput={setSearchInput}
-            />
-          }
-        />
+        <Route path="/results" element={<Results />} />
         <Route path="/add-new" element={<AddNew />} />
       </Routes>
     </BrowserRouter>

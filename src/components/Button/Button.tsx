@@ -3,10 +3,20 @@ import styles from "./styles.module.scss";
 import { ButtonProps } from "../../types";
 
 const Button = (props: ButtonProps) => {
-  const { text, handleClick } = props;
+  const { text, handleClick, type, disabled=false } = props;
+
+  
   return (
     <div>
-      <button onClick={()=>handleClick?.()} className={styles.button}>{text}</button>
+      <button
+        disabled={disabled}
+        type={type}
+        onClick={() => handleClick?.()}
+        className={styles.button}
+        style={{background: disabled ? '#4F75C2': '#204080'}}
+      >
+        {text}
+      </button>
     </div>
   );
 };

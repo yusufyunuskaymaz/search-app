@@ -188,3 +188,36 @@ ul li {
   border-radius: .5rem;
 }
 
+.inputContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  // margin-top: 1rem;
+  .inputDiv{
+      border: 2px solid #204080;
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      border-radius: .5rem;
+      width: 100%;
+  }
+  .searchInput{
+      width: 100%;
+      padding: .7rem 1rem;
+      border-radius: .5rem;
+      border: none;
+      &:focus{
+          outline: none;
+      }
+  }
+  .searchButton{
+      padding: .5rem 1rem;
+      cursor: pointer;
+      background-color: #204080;
+      color: #fff;
+      border-radius: .5rem;
+      border: none;
+  }
+}

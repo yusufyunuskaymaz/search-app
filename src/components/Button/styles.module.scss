@@ -4,6 +4,9 @@
     border: none;
     padding: .7rem 2rem;
     border-radius: .5rem;
-    cursor: pointer;
+    // cursor: pointer;
     font-weight: 700;
+    &:hover{
+        background-color: #4F75C2;
+    }
 }

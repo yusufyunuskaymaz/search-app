@@ -7,9 +7,11 @@ import location from "../../assets/images/location.png"
 
 
 export const SearchResult = (props: SearchResultProps) => {
-  let { results } = props;
+  let { results, setToLocalStorage } = props;
 
   const navigate = useNavigate();
+
+  const searchValue = "uyyy"
 
   const length = results.length;
 
@@ -21,6 +23,12 @@ export const SearchResult = (props: SearchResultProps) => {
     showMore = true;
   } else {
     previewResults = results;
+  }
+
+  const handleClick = ()=>{
+    navigate("/results")
+    setToLocalStorage()
+
   }
   return (
     <>
@@ -39,7 +47,7 @@ export const SearchResult = (props: SearchResultProps) => {
           {showMore ? (
             <p
               className={styles.showMore}
-              onClick={() => navigate("/results", { state: results })}
+              onClick={() => handleClick() }
             >
               Show More...
             </p>

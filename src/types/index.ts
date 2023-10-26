@@ -3,7 +3,7 @@ export type IUser = {
   nameSurname: string;
   company: string;
   email: string;
-  phone: string;
+  phone?: string;
   website: string;
   country: string;
   city: string;
@@ -13,17 +13,30 @@ export type IUser = {
 export type SearchInputProps = {
   setSearchInput(val:string):void;
   searchInput?:string;
-  results?: any[]
+  results?: any[];
+  setToLocalStorage?():void
+  isResultPage?:boolean
+  searchResults?():void
+}
+export type ResultsSearchInputProps = {
+  results?: any[];
+  setToLocalStorage?():void
+  isResultPage?:boolean
+  searchResults?():void
 }
 
 export type SearchResultProps = {
   results: any[];
   setSearchInput(val: string): void;
+  setToLocalStorage():void
+
 };
 
 export type ButtonProps = {
   text:string;
   handleClick?:()=>void
+  type: "submit" | "button"
+  disabled?:boolean
 }
 
 export type ITitleProps = {
