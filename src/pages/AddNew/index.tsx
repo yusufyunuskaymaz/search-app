@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { IUser } from "../../types";
 import close from "../../assets/images/close.png";
 import { getFromLocalStorage } from "../Home";
+import axios from "axios";
 
 export const AddNew = () => {
   const navigate = useNavigate();
@@ -78,9 +79,28 @@ export const AddNew = () => {
     return emailPattern.test(email);
   };
 
-  const isValidURL = (url: string) => {
-    const urlPattern = /^(https?:\/\/)?[\w.-]+\.\w+(\S+)?$/;
-    return urlPattern.test(url);
+  const isValidURL = async (url: string) => {
+    // const urlPattern = /^(https?:\/\/)?[\w.-]+\.\w+(\S+)?$/;
+    // return urlPattern.test(url);
+    const encodedParams = new URLSearchParams();
+    encodedParams.set("url", "https://google.com/");
+
+    const options = {
+      method: "POST",
+      url: "https://url-shortener-service.p.rapidapi.com/shorten",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+        "X-RapidAPI-Key": "39374c83acmsh04307aae8d9d675p140efejsnb22703cf160d",
+        "X-RapidAPI-Host": "url-shortener-service.p.rapidapi.com",
+      },
+      data: encodedParams,
+    };
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const [disabled, setDisabled] = useState(true);
