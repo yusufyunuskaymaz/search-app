@@ -67,8 +67,6 @@ export const Results = (props: ResultsSearchInputProps) => {
     searchResults();
   };
 
-  console.log(previewData,"ss");
-
   return (
     <div className={styles.layout}>
       <div className={styles.head}>
@@ -126,7 +124,7 @@ export const Results = (props: ResultsSearchInputProps) => {
                       <div className={styles.date}>
                         <span>{item.nameSurname}</span>
                         <p className={styles.company}>
-                          {new Date(item.date).toLocaleDateString()}
+                          {new Date(item.date).toLocaleDateString("en-GB")}
                         </p>
                       </div>
                     </div>
