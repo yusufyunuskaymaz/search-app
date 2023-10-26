@@ -11,8 +11,6 @@ export const SearchResult = (props: SearchResultProps) => {
 
   const navigate = useNavigate();
 
-  const searchValue = "uyyy"
-
   const length = results.length;
 
   let previewResults: IUser[] = [];

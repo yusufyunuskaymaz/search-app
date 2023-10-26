@@ -1,7 +1,7 @@
 export type IUser = {
   id: number;
   nameSurname: string;
-  company: string;
+  company?: string;
   email: string;
   phone?: string;
   website: string;

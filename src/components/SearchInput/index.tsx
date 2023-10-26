@@ -42,10 +42,10 @@ export const SearchInput = (props: SearchInputProps) => {
           defaultValue={searchInput}
           className={styles.searchInput}
           type="text"
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
         />
       </div>
-      <Button type="button" handleClick={() => handleClick()} text="Search" />
+      <Button type="button" handleClick={handleClick} text="Search" />
     </div>
   );
 };

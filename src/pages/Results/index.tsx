@@ -88,6 +88,7 @@ export const Results = (props: ResultsSearchInputProps) => {
               type="button"
               handleClick={() => handleClick()}
               text="Search"
+              disabled={!searchInput}
             />
           </div>
         </div>
@@ -175,7 +176,9 @@ export const Results = (props: ResultsSearchInputProps) => {
           : pageNumbers.map((item) => (
               <span
                 onClick={() => setPaginationIndex(item)}
-                className={styles.pagination}
+                className={`${styles.pagination} ${
+                  paginationIndex === item ? styles.active : ""
+                }`}
               >
                 {item}
               </span>

@@ -113,7 +113,7 @@ export const Home = () => {
         />
       </div>
 
-      {searchInput ? (
+      {searchInput && (
         <div className={styles.searchResult}>
           <SearchResult
             results={results}
@@ -121,8 +121,6 @@ export const Home = () => {
             setToLocalStorage={setToLocalStorage}
           />
         </div>
-      ) : (
-        ""
       )}
     </div>
   );
