@@ -5,7 +5,7 @@ describe('tesodev test', () => {
     cy.get('[data-test="main-logo"]').should('be.visible')
     cy.get('h4').should('be.visible').contains('Find in records')
     cy.get('[data-test="main-input"]').type('test')
-    cy.get('[data-test="main-button"]').click()
+    cy.get('[data-test="main-button"]').click({multiple:true})
     cy.url().should("include", "/results");
     cy.get('').should('be.visible').contains('Search')
     cy.get('.style_flex__Kk-qP').should('be.visible')
