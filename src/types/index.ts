@@ -13,13 +13,13 @@ export type IUser = {
 export type SearchInputProps = {
   setSearchInput(val:string):void;
   searchInput?:string;
-  results?: any[];
+  results?: IUser[];
   setToLocalStorage?():void
   isResultPage?:boolean
   searchResults?():void
 }
 export type ResultsSearchInputProps = {
-  results?: any[];
+  results?: IUser[];
   setToLocalStorage?():void
   isResultPage?:boolean
   searchResults?():void
