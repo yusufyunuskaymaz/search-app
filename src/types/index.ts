@@ -26,7 +26,7 @@ export type ResultsSearchInputProps = {
 }
 
 export type SearchResultProps = {
-  results: any[];
+  results: IUser[];
   setSearchInput(val: string): void;
   setToLocalStorage():void
 
